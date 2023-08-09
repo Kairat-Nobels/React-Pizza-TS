@@ -1,5 +1,5 @@
 import './header.css'
-import logo from '../../../public/pizzaLogo.svg'
+import logo from '/pizzaLogo.svg'
 import { Link } from 'react-router-dom'
 import Search from '../Search/Search'
 

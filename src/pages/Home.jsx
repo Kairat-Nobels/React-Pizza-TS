@@ -6,18 +6,19 @@ import { Skeleton } from '../components/PizzaBlock/Skeloton'
 import { useEffect, useState } from 'react'
 import Pagination from "../components/Pagination/Pagination";
 import { SearchContext } from "../App";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory, setSort } from "../redux/slices/filterSlice";
 // import pizzas from './assets/pizzas.json'
 function Home()
 {
     const { searchValue } = React.useContext(SearchContext)
     const [items, setItems] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [category, setCategory] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
-    const [sort, setSort] = useState({
-        name: 'популярности (DESC)',
-        value: 'rating'
-    })
+
+
+    const dispatch = useDispatch()
+    const { categoryId, sort } = useSelector(s => s.filter)
     useEffect(() =>
     {
         window.scrollTo(0, 0)
@@ -26,11 +27,10 @@ function Home()
     {
         setIsLoading(true)
 
-        const sortBy = sort.value.replace('-', '')
-        const order = sort.value.includes('-') ? 'asc' : 'desc'
-        const categor = category > 0 ? `category=${category}` : ''
+        const sortBy = sort.sortProperty.replace('-', '')
+        const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
+        const categor = categoryId > 0 ? `category=${categoryId}` : ''
         const search = searchValue ? `&search=${searchValue}` : '';
-        // fetch(`https://64d20f21f8d60b1743615e6b.mockapi.io/items?page=${currentPage}&limit=4&${categor}&sortBy=${sortBy}&order=${order}`)
         fetch(`https://64d20f21f8d60b1743615e6b.mockapi.io/items?page=${currentPage}&limit=4&${categor}&sortBy=${sortBy}&order=${order}${search}`)
             .then((res) =>
             {
@@ -40,22 +40,21 @@ function Home()
                 setItems(json);
                 setIsLoading(false)
             })
-    }, [category, sort, searchValue, currentPage])
-    // [category, sort, searchValue]
+    }, [categoryId, sort, searchValue, currentPage])
 
     return (
         <div className="container">
             <div className="contentTop">
-                <Categories category={category} setCategory={(i) => setCategory(i)} />
-                <Sort sort={sort} setSort={(i) => setSort(i)} />
+                <Categories category={categoryId} setCategory={(i) => dispatch(setCategory(i))} />
+                <Sort sort={sort} setSort={(i) => dispatch(setSort(i))} />
             </div>
             <h2 className="contentTitle">Все пиццы</h2>
             <div className="contentItems">
                 {
-                    isLoading ? [...new Array(6)].map((_, i) => <Skeleton key={i} />) : items.map((obj) => <PizzaBlock {...obj} key={obj.id} />)
+                    isLoading ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : items.map((obj) => <PizzaBlock {...obj} key={obj.id} />)
                 }
             </div>
-            <Pagination onChangePage={(number) => setCurrentPage(number)} />
+            {categoryId === 0 && <Pagination onChangePage={(number) => setCurrentPage(number)} />}
         </div>
     )
 }
