@@ -9,7 +9,7 @@ const filterSlice = createSlice({
         currentPage: 1,
         sort: {
             name: 'популярности (ASC)',
-            sortProperty: 'raiting'
+            sortProperty: '-rating'
         }
     },
     reducers: {
@@ -24,9 +24,15 @@ const filterSlice = createSlice({
         setCurrentPage(state, action)
         {
             state.currentPage = action.payload
+        },
+        setFilters(state, action)
+        {
+            state.currentPage = Number(action.payload.currentPage)
+            state.categoryId = Number(action.payload.categoryId)
+            state.sort = action.payload.sort
         }
     }
 })
 
-export const { setCategory, setSort, setCurrentPage } = filterSlice.actions
+export const { setCategory, setSort, setCurrentPage, setFilters } = filterSlice.actions
 export default filterSlice.reducer;

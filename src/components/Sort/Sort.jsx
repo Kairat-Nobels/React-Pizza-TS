@@ -1,21 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './sort.css'
+
+export const sortList = [{ name: 'популярности (DESC)', sortProperty: 'rating' },
+{ name: 'популярности (ASC)', sortProperty: '-rating' },
+{ name: 'цене (DESC)', sortProperty: 'price' },
+{ name: 'цене (ASC)', sortProperty: '-price' },
+{ name: 'алфавиту (DESC)', sortProperty: 'title' },
+{ name: 'алфавиту (ASC)', sortProperty: '-title' }]
+
 function Sort({ sort, setSort })
 {
+  const sortRef = useRef()
   const [open, setOpen] = useState(false)
-  const list = [{ name: 'популярности (DESC)', sortProperty: 'rating' },
-  { name: 'популярности (ASC)', sortProperty: '-rating' },
-  { name: 'цене (DESC)', sortProperty: 'price' },
-  { name: 'цене (ASC)', sortProperty: '-price' },
-  { name: 'алфавиту (DESC)', sortProperty: '-title' },
-  { name: 'алфавиту (ASC)', sortProperty: 'title' }]
   const onSelect = (i) =>
   {
     setSort(i);
     setOpen(false)
   }
+  useEffect(() =>
+  {
+    const handleClickOutside = (e) =>
+    {
+      if (!e.composedPath().includes(sortRef.current)) setOpen(false)
+    }
+    document.body.addEventListener('click', handleClickOutside)
+
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -36,7 +49,7 @@ function Sort({ sort, setSort })
         <div className="sort__popup">
           <ul>
             {
-              list.map((obj, i) => (
+              sortList.map((obj, i) => (
                 <li key={i} onClick={() => onSelect(obj)} className={sort.name === obj.name ? "active" : ''}>
                   {obj.name}
                 </li>
