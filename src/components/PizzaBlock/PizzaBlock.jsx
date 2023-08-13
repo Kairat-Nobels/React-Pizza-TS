@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addCart } from '../../redux/slices/cartSlice'
 function PizzaBlock({ id, title, price, imageUrl, sizes, types })
 {
-    const [activeType, setActiveType] = useState(0)
-    const [activeSize, setActiveSize] = useState(sizes[0] || 0)
     const typeNames = ['тонкое', 'традиционное']
+    const [activeType, setActiveType] = useState(types.includes(0) ? 0 : 1)
+    const [activeSize, setActiveSize] = useState(sizes[0] || 0)
     const { items } = useSelector(state => state.cart)
     const dispatch = useDispatch()
     const onClickAdd = () =>
