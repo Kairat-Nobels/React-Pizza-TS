@@ -5,7 +5,6 @@ import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import { Skeleton } from '../components/PizzaBlock/Skeloton'
 import { useEffect } from 'react'
 import Pagination from "../components/Pagination/Pagination";
-import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory, setCurrentPage, setFilters, setSort } from "../redux/slices/filterSlice";
 import qs from 'qs'
@@ -13,12 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { getPizzas } from "../redux/slices/pizzasSlice";
 function Home()
 {
-    const { searchValue } = React.useContext(SearchContext)
     const isSearch = useRef(false)
     const isMounted = useRef(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { categoryId, sort, currentPage } = useSelector(s => s.filter)
+    const { categoryId, sort, currentPage, searchValue } = useSelector(s => s.filter)
     const { pizzas, status } = useSelector(s => s.pizzas)
 
     const asyncPizza = async () =>
@@ -79,11 +77,14 @@ function Home()
                     :
                     <div className="contentItems">
                         {
-                            status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas.map((obj) => <PizzaBlock {...obj} key={obj.id} />)
+                            status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas?.length > 0 ? pizzas.map((obj) => <PizzaBlock {...obj} key={obj.id} />)
+                                : <div className="content_error-info">
+                                    <h2>По вашему запросу ничего не найдено</h2>
+                                </div>
                         }
                     </div>
             }
-            {categoryId === 0 && pizzas.length > 0 && <Pagination currentPage={currentPage} onChangePage={(number) => dispatch(setCurrentPage(number))} />}
+            {categoryId === 0 && pizzas.length > 0 && !searchValue && <Pagination currentPage={currentPage} onChangePage={(number) => dispatch(setCurrentPage(number))} />}
         </div>
     )
 }

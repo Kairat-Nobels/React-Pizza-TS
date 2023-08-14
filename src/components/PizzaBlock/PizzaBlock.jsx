@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import './pizzaBlock.css'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCart } from '../../redux/slices/cartSlice'
+import { addCart, selectCart } from '../../redux/slices/cartSlice'
 function PizzaBlock({ id, title, price, imageUrl, sizes, types })
 {
     const typeNames = ['тонкое', 'традиционное']
     const [activeType, setActiveType] = useState(types.includes(0) ? 0 : 1)
     const [activeSize, setActiveSize] = useState(sizes[0] || 0)
-    const { items } = useSelector(state => state.cart)
+    const { items } = useSelector(selectCart)
     const dispatch = useDispatch()
     const onClickAdd = () =>
     {
