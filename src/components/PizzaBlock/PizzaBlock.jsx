@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './pizzaBlock.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, selectCart } from '../../redux/slices/cartSlice'
+import { NavLink } from 'react-router-dom'
 function PizzaBlock({ id, title, price, imageUrl, sizes, types })
 {
     const typeNames = ['тонкое', 'традиционное']
@@ -17,7 +18,7 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types })
     return (
         <div className='pizza-wrapper'>
             <div className="pizza-block">
-                <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+                <NavLink to={`/pizza/${id}`}><img className="pizza-block__image" src={imageUrl} alt="Pizza" /></NavLink>
                 <h4 className="pizza-block__title">{title}</h4>
                 <div className="pizza-block__selector">
                     <ul>

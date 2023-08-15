@@ -1,4 +1,4 @@
-.pizza-wrapper{
+.pizza-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,6 +12,7 @@
 
 .pizza-block__image {
     width: 260px;
+    cursor: pointer;
 }
 
 .pizza-block__title {
@@ -28,13 +29,16 @@
     flex-direction: column;
     padding: 6px;
 }
+
 .pizza-block__selector ul {
     display: flex;
     flex: 1;
 }
+
 .pizza-block__selector ul:first-of-type {
     margin-bottom: 6px;
 }
+
 .pizza-block__selector li {
     padding: 8px;
     flex: 1;
@@ -43,6 +47,7 @@
     font-size: 14px;
     /* @include noselect(); */
 }
+
 .pizza-block__selector li.active {
     background: #ffffff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
