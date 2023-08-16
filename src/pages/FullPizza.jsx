@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 
 function FullPizza()
 {
@@ -31,6 +31,9 @@ function FullPizza()
             <h2>{pizza.title}</h2>
             <p>{pizza.description}</p>
             <h4>{pizza.price} сом</h4>
+            <Link to='/'>
+                <button className='button button--outline button--add'><span>Назад</span></button>
+            </Link>
         </div>
     )
 }

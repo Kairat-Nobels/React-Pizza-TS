@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './pizzaBlock.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, selectCart } from '../../redux/slices/cartSlice'
 import { NavLink } from 'react-router-dom'
@@ -16,7 +15,7 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types })
         dispatch(addCart(item))
     }
     return (
-        <div className='pizza-wrapper'>
+        <div className='pizza-block-wrapper'>
             <div className="pizza-block">
                 <NavLink to={`/pizza/${id}`}><img className="pizza-block__image" src={imageUrl} alt="Pizza" /></NavLink>
                 <h4 className="pizza-block__title">{title}</h4>

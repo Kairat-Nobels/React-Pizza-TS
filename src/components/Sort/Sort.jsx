@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import './sort.css'
 
 export const sortList = [{ name: 'популярности (DESC)', sortProperty: 'rating' },
 { name: 'популярности (ASC)', sortProperty: '-rating' },

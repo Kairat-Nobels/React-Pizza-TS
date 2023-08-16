@@ -64,21 +64,21 @@ function Home()
 
     return (
         <div className="container">
-            <div className="contentTop">
+            <div className="content__top">
                 <Categories category={categoryId} setCategory={(i) => dispatch(setCategory(i))} />
                 <Sort sort={sort} setSort={(i) => dispatch(setSort(i))} />
             </div>
-            <h2 className="contentTitle">Все пиццы</h2>
+            <h2 className="content__title">Все пиццы</h2>
             {
-                status === 'error' ? <div className="content_error-info">
+                status === 'error' ? <div className="content__error-info">
                     <h2>Произошла ошибка 😕</h2>
                     <p>К сожалению, не удалось получить пиццы. Попробуйте повторить попытку позже.</p>
                 </div>
                     :
-                    <div className="contentItems">
+                    <div className="content__items">
                         {
                             status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas?.length > 0 ? pizzas.map((obj) => <PizzaBlock {...obj} key={obj.id} />)
-                                : <div className="content_error-info">
+                                : <div className="content__error-info">
                                     <h2>По вашему запросу ничего не найдено</h2>
                                 </div>
                         }

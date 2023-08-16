@@ -1,11 +1,8 @@
-import './buttons.css'
-import './App.css'
-import Header from './components/Header/Header'
+import './scss/app.scss';
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Cart from './pages/Cart'
 import { Route, Routes } from 'react-router-dom'
-import { useState } from 'react'
 import React from 'react'
 import FullPizza from './pages/FullPizza'
 import Layout from './Layout/Layout'

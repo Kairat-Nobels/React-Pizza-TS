@@ -1,4 +1,3 @@
-import './header.css'
 import logo from '/pizzaLogo.svg'
 import { Link, useLocation } from 'react-router-dom'
 import Search from '../Search/Search'
@@ -13,7 +12,7 @@ function Header()
         <div className="header">
             <div className="container">
                 <Link to='/'>
-                    <div className="HeaderLogo">
+                    <div className="header__logo">
                         <img width="38" src={logo} alt="Pizza logo" />
                         <div>
                             <h1>React Pizza</h1>
