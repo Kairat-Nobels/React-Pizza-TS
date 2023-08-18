@@ -1,12 +1,16 @@
 import axios from 'axios'
-import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 
 function FullPizza()
 {
-    const [pizza, setPizza] = useState('')
+    const [pizza, setPizza] = useState<{
+        imageUrl: string;
+        title: string;
+        description: string;
+        price: number;
+    }>();
     const { id } = useParams()
     const navigate = useNavigate()
     useEffect(() =>
@@ -24,6 +28,7 @@ function FullPizza()
         }
         getPizza()
     }, [])
+    
     if (!pizza) return 'Загрузка...'
     return (
         <div className='container'>
