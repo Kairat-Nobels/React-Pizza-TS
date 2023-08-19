@@ -1,24 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
 
-export const sortList = [{ name: 'популярности (DESC)', sortProperty: 'rating' },
+type SortItem = {
+  name: string;
+  sortProperty: string;
+}
+export const sortList: SortItem[] = [{ name: 'популярности (DESC)', sortProperty: 'rating' },
 { name: 'популярности (ASC)', sortProperty: '-rating' },
 { name: 'цене (DESC)', sortProperty: 'price' },
 { name: 'цене (ASC)', sortProperty: '-price' },
 { name: 'алфавиту (DESC)', sortProperty: 'title' },
 { name: 'алфавиту (ASC)', sortProperty: '-title' }]
 
-function Sort({ sort, setSort })
-{
-  const sortRef = useRef()
+type SortProps = {
+  sort: SortItem;
+  setSort: any;
+}
+
+const Sort: React.FC<SortProps> = ({ sort, setSort }) =>{
+  const sortRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
-  const onSelect = (i) =>
+  const onSelect = (i: SortItem) =>
   {
     setSort(i);
     setOpen(false)
   }
   useEffect(() =>
   {
-    const handleClickOutside = (e) =>
+    const handleClickOutside = (e: any) =>
     {
       if (!e.composedPath().includes(sortRef.current)) setOpen(false)
     }
