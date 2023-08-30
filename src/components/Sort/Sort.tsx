@@ -26,9 +26,9 @@ const Sort: React.FC<SortProps> = ({ sort, setSort }) =>{
   }
   useEffect(() =>
   {
-    const handleClickOutside = (e: any) =>
+    const handleClickOutside = (e: MouseEvent ) =>
     {
-      if (!e.composedPath().includes(sortRef.current)) setOpen(false)
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) setOpen(false)
     }
     document.body.addEventListener('click', handleClickOutside)
 
@@ -38,6 +38,7 @@ const Sort: React.FC<SortProps> = ({ sort, setSort }) =>{
     <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
+          transform={open ? 'rotate(0)': 'rotate(180)'}
           width="10"
           height="6"
           viewBox="0 0 10 6"
