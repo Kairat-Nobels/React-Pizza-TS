@@ -11,23 +11,33 @@ type Pizza = {
     types: number[],
     rating: number
 }
-interface PizzaSliceState {
-    pizzas: Pizza[],
-    status: 'loading' | 'success' | 'error'
+
+export enum Status {
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error',
 }
 
-export const getPizzas = createAsyncThunk<Pizza[], Record<string, string>>(
+interface PizzaSliceState {
+    pizzas: Pizza[],
+    status: Status
+}
+
+export type SearchPizzaParams = {
+    categoryId: number, currentPage: string, sortProperty: string, order: string, search: string
+}
+export const getPizzas = createAsyncThunk<Pizza[], SearchPizzaParams>(
     'pizzas/getPizzas',
     async (params) => {
-        const { categor, currentPage, sortBy, order, search } = params;
-        const { data } = await axios.get<Pizza[]>(`https://64d20f21f8d60b1743615e6b.mockapi.io/items?page=${categor ? 1 : currentPage}&limit=4&${categor}&sortBy=${sortBy}&order=${order}${search}`)
+        const { categoryId, currentPage, sortProperty, order, search } = params;
+        const { data } = await axios.get<Pizza[]>(`https://64d20f21f8d60b1743615e6b.mockapi.io/items?page=${categoryId ? 1 : currentPage}&limit=4&${categoryId}&sortBy=${sortProperty}&order=${order}${search}`)
 
         return data
     }
 )
 const initialState: PizzaSliceState = {
     pizzas: [],
-    status: 'loading'
+    status: Status.LOADING
 }
 const pizzasSlice = createSlice({
     name: 'pizzas',
@@ -39,15 +49,15 @@ const pizzasSlice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(getPizzas.pending, (state) => {
-            state.status = 'loading';
+            state.status = Status.LOADING;
             state.pizzas = []
         })
         builder.addCase(getPizzas.fulfilled, (state, action) => {
-            state.status = 'success';
+            state.status = Status.SUCCESS;
             state.pizzas = action.payload;
         })
         builder.addCase(getPizzas.rejected, (state) => {
-            state.status = 'error';
+            state.status = Status.ERROR;
             state.pizzas = []
         })
     },
