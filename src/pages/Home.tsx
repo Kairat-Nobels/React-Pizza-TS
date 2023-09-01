@@ -20,7 +20,9 @@ const Home: React.FC = () => {
 
     const { pizzas, status } = useSelector(selectPizza)
     const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
-
+    const onChangeCategory = React.useCallback((idx: number) => {
+        dispatch(setCategory(idx))
+    }, [])
     const asyncPizza = async () =>
     {
         const sortBy = sort.sortProperty.replace('-', '')
@@ -47,36 +49,36 @@ const Home: React.FC = () => {
         }
         
         isMounted.current = true
-    }, [categoryId, sort, currentPage])
+    }, [categoryId, sort.sortProperty, currentPage, searchValue])
 
-    useEffect(() =>
-    {
-        if (window.location.search) {
-            const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams
-            const sort = sortList.find(obj => obj.sortProperty === params.sortProperty)
+    // useEffect(() =>
+    // {
+    //     if (window.location.search) {
+    //         const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams
+    //         const sort = sortList.find(obj => obj.sortProperty === params.sortBy)
             
-            dispatch(setFilters({
-                searchValue: params.search,
-                categoryId: Number(params.categoryId),
-                currentPage: Number(params.currentPage),
-                sort: sort || sortList[0]
-            }))
-            isSearch.current = true
-        }
-    }, [])
+    //         dispatch(setFilters({
+    //             searchValue: params.search,
+    //             categoryId: Number(params.category),
+    //             currentPage: Number(params.currentPage),
+    //             sort: sort || sortList[1]
+    //         }))
+    //         isSearch.current = true
+    //     }
+    // }, [])
 
     useEffect(() =>
     {
         window.scrollTo(0, 0)
         if (!isSearch.current) asyncPizza()
         isSearch.current = false
-    }, [categoryId, sort, searchValue, currentPage])
+    }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
     return (
         <div className="container">
             <div className="content__top">
-                <Categories category={categoryId} setCategory={(i) => dispatch(setCategory(i))} />
-                <Sort sort={sort} setSort={(i: any) => dispatch(setSort(i))} />
+                <Categories category={categoryId} setCategory={onChangeCategory} />
+                <Sort sort={sort} />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             {

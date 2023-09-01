@@ -1,3 +1,4 @@
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 import React from "react"
 
 type CategoriesProps = {
@@ -8,8 +9,7 @@ type CategoriesProps = {
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
-const Categories: React.FC<CategoriesProps> = ({ getCategories, category, setCategory }) => {
-    
+const Categories: React.FC<CategoriesProps> = React.memo(({ getCategories, category, setCategory }) => {
     getCategories?.(categories)
 
     return (
@@ -19,5 +19,5 @@ const Categories: React.FC<CategoriesProps> = ({ getCategories, category, setCat
             </ul>
         </div>
     )
-}
+})
 export default Categories

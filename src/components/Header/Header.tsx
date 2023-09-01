@@ -6,7 +6,7 @@ import { selectCart } from '../../redux/slices/cartSlice'
 
 function Header()
 {
-    const { totalPrice, number: totalCount } = useSelector(selectCart)
+    const { totalPrice, totalCount } = useSelector(selectCart)
     const location = useLocation()
     return (
         <div className="header">
@@ -20,7 +20,8 @@ function Header()
                         </div>
                     </div>
                 </Link>
-                <Search />
+                {location.pathname !== '/cart' && <Search />}
+    
                 <div className="header__cart">
                     {location.pathname !== '/cart' &&
                         <Link to="/cart" className="button button--cart">
