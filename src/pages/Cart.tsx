@@ -7,6 +7,8 @@ import CartEmpty from '../components/CartEmpty/CartEmpty'
 const Cart: React.FC = () =>{
   const { items, totalPrice, totalCount } = useSelector(selectCart)
   const dispatch = useDispatch()
+  console.log(items);
+  
   const onClear = () =>
   {
     if (window.confirm('Очистить корзину?')) dispatch(clearCart())
