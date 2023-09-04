@@ -3,7 +3,6 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Cart from './pages/Cart'
 import { Route, Routes } from 'react-router-dom'
-import React from 'react'
 import FullPizza from './pages/FullPizza'
 import Layout from './Layout/Layout'
 

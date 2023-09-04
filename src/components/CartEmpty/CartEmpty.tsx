@@ -1,4 +1,3 @@
-import React from 'react'
 import empty from '../../assets/img/empty-cart.png'
 import { Link } from 'react-router-dom'
 function CartEmpty()

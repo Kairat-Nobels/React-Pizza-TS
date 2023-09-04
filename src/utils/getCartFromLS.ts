@@ -1,3 +1,4 @@
+import { CartItem } from "../redux/cart/types";
 import { calcTotalCount } from "./calcTotalCount";
 import { calcTotalPrice } from "./calcTotalPrice";
 
@@ -8,7 +9,7 @@ export const getCartFromLC = () => {
     const totalCount = calcTotalCount(items)
 
     return {
-        items,
+        items: items as CartItem[],
         totalCount,
         totalPrice
     }

@@ -1,16 +1,18 @@
 import React, { useRef } from "react";
 import Categories from '../components/Categories/Categories'
-import Sort, { sortList } from '../components/Sort/Sort'
+import Sort from '../components/Sort/Sort'
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock'
 import { Skeleton } from '../components/PizzaBlock/Skeloton'
 import { useEffect } from 'react'
 import Pagination from "../components/Pagination/Pagination";
 import { useSelector } from "react-redux";
-import { selectFilter, setCategory, setCurrentPage, setFilters, setSort } from "../redux/slices/filterSlice";
 import qs from 'qs'
 import { useNavigate } from "react-router-dom";
-import { SearchPizzaParams, getPizzas, selectPizza } from "../redux/slices/pizzasSlice";
 import { useAppDispatch } from "../redux/store";
+import { selectFilter } from "../redux/filter/selectors";
+import { selectPizza } from "../redux/pizza/selectors";
+import { setCategory, setCurrentPage } from "../redux/filter/slice";
+import { getPizzas } from "../redux/pizza/asycnActions";
 
 const Home: React.FC = () => {
     const isSearch = useRef(false)
