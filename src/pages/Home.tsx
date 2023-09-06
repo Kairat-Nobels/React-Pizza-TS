@@ -29,8 +29,8 @@ const Home: React.FC = () => {
     {
         const sortBy = sort.sortProperty.replace('-', '')
         const order = sort.sortProperty.includes('-') ? 'asc' : 'desc'
-        const category = categoryId > 0 ? `category=${categoryId}` : 0
-        const search = searchValue ? `&search=${searchValue}` : '';
+        const category = categoryId > 0 ? categoryId : ''
+        const search = searchValue;
 
         dispatch(
             // @ts-ignore

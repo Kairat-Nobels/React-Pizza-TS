@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce'
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '../../redux/filter/slice'
 
-const Search = () =>
+const Search: React.FC = () =>
 {
   const dispatch = useDispatch()
   const [value, setValue] = React.useState('')
@@ -16,7 +16,7 @@ const Search = () =>
       dispatch(setSearchValue(str))
     }, 1000), [])
 
-  const clickClear = (e: React.MouseEvent<SVGSVGElement>) =>
+  const clickClear = () =>
   {
     dispatch(setSearchValue(''))
     setValue('')
