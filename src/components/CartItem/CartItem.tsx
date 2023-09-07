@@ -4,7 +4,7 @@ import { minusCart, plusCart, removeCart } from '../../redux/cart/slice'
 
 type CartItemProps = {id: string, title: string, sum: number, count: number, imageUrl: string, type: string, size: number}
 
-const CartItem: React.FC<CartItemProps> = ({ id, title, sum, count, imageUrl, type, size }) =>{
+export const CartItem: React.FC<CartItemProps> = ({ id, title, sum, count, imageUrl, type, size }) =>{
     const dispatch = useDispatch()
     const onRemove = () =>
     {
@@ -50,5 +50,3 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, sum, count, imageUrl, ty
         </div>
     )
 }
-
-export default CartItem

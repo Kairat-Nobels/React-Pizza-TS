@@ -1,7 +1,6 @@
 import styles from './notFoundBlock.module.css'
 
-function NotFoundBlock()
-{
+export const NotFoundBlock = ()=>{
     return (
         <div className={styles.root}>
             <h1><span>😕</span><br />Ничего не найдено</h1>
@@ -9,4 +8,3 @@ function NotFoundBlock()
         </div>
     )
 }
-export default NotFoundBlock

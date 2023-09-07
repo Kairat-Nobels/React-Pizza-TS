@@ -7,7 +7,7 @@ import { CartItem } from '../../redux/cart/types'
 
 type PizzaBlockProps = {id: string, title: string, price: number, imageUrl: string, sizes: number[], types: number[] }
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) =>{
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) =>{
     const typeNames = ['тонкое', 'традиционное']
     const [activeType, setActiveType] = useState(types.includes(0) ? 0 : 1)
     const [activeSize, setActiveSize] = useState(sizes[0] || 0)
@@ -49,4 +49,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, siz
         </div >
     )
 }
-export default PizzaBlock

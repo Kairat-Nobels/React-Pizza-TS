@@ -11,7 +11,7 @@ export const getPizzas = createAsyncThunk<Pizza[], SearchPizzaParams>(
         const { data } = await axios.get<Pizza[]>(`https://64d20f21f8d60b1743615e6b.mockapi.io/items`, {
             params: pickBy(
                 {
-                    page: currentPage,
+                    page: search ? 1 : currentPage,
                     limit: 4,
                     category,
                     sortBy,
