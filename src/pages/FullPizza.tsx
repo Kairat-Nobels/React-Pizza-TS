@@ -31,14 +31,16 @@ function FullPizza()
     
     if (!pizza) return 'Загрузка...'
     return (
-        <div className='container'>
-            <img src={pizza.imageUrl} alt="img" />
+        <div className='container fullpizza'>
+            <div className='fullpizza-img'><img src={pizza.imageUrl} alt="img" /></div>
             <h2>{pizza.title}</h2>
             <p>{pizza.description}</p>
-            <h4>{pizza.price} сом</h4>
-            <Link to='/'>
-                <button className='button button--outline button--add'><span>Назад</span></button>
-            </Link>
+            <div className='down-content'>
+                <h4>{pizza.price} сом</h4>
+                <Link to='/'>
+                    <button className='button button--outline button--add'><span>Назад</span></button>
+                </Link>
+            </div>
         </div>
     )
 }
